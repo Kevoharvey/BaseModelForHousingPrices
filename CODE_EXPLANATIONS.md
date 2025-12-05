@@ -376,58 +376,34 @@ xgb_model.fit(
 
 ---
 
-## Section 4.4: LightGBM
-
+## Section 4.4: Linear Regression
 ```python
-lgb_model = lgb.LGBMRegressor(
-    n_estimators=200,
-    max_depth=6,
-    learning_rate=0.1,
-    subsample=0.8,
-    colsample_bytree=0.8,
-```
-- Similar parameters to XGBoost
-- LightGBM uses different tree-building algorithm (leaf-wise vs level-wise)
+print("Training Linear Regression...")
 
+lr_model = LinearRegression()
+lr_model.fit(X_train, y_train)
+```
+- Fitting the X and Y along the data
+# Predictions
 ```python
-callbacks=[lgb.log_evaluation(period=50)]
+lr_pred_train = lr_model.predict(X_train)
+lr_pred_val = lr_model.predict(X_val)
 ```
-- Print evaluation metrics every 50 iterations
-- Helps monitor training progress
-
----
-
-## Section 4.5: CatBoost
-
+- Training the model along the data
+# Calculate metrics
 ```python
-cb_model = CatBoostRegressor(
-    iterations=200,
-```
-- Number of boosting iterations (equivalent to n_estimators)
+lr_train_rmse = np.sqrt(mean_squared_error(y_train, lr_pred_train))
+lr_val_rmse = np.sqrt(mean_squared_error(y_val, lr_pred_val))
+lr_train_r2 = r2_score(y_train, lr_pred_train)
+lr_val_r2 = r2_score(y_val, lr_pred_val)
 
-```python
-    depth=6,
+print(f"\n✓ Linear Regression Results:")
+print(f"  Train RMSE: ${lr_train_rmse:,.2f}")
+print(f"  Val RMSE: ${lr_val_rmse:,.2f}")
+print(f"  Train R²: {lr_train_r2:.4f}")
+print(f"  Val R²: {lr_val_r2:.4f}")
 ```
-- Tree depth (equivalent to max_depth)
-
-```python
-    learning_rate=0.1,
-    random_seed=42,
-```
-- Same concepts as other gradient boosting models
-
-```python
-    verbose=50
-```
-- Print progress every 50 iterations
-
-```python
-    eval_set=(X_val, y_val),
-    use_best_model=True
-```
-- `use_best_model=True`: Automatically uses the iteration with best validation score
-- Prevents overfitting by reverting to best checkpoint
-
+- examining the model
 ---
 
 ## Section 5: Model Comparison
