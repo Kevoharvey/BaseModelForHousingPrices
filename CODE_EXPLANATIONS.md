@@ -1,3 +1,9 @@
+# FinalModel.ipynb - Detailed Code Explanation
+
+This document provides a comprehensive, line-by-line explanation of the code within `FinalModel.ipynb`. This notebook is designed to train, compare, and visualize multiple machine learning regression models for predicting housing prices, culminating in an interactive Grounded AI application.
+
+---
+
 ## 1. Import Libraries
 This section imports all necessary Python libraries for data handling, plotting, and machine learning.
 
